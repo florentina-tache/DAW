@@ -1,18 +1,64 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.scss";
-import MainNavigation from "./components/Navigation/MainNavigation";
+import React, { useState, useCallback } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
+import MainNavigation from './components/Navigation/MainNavigation';
 
-function App() {
-  return (
-    <div>
-      <Router>
+import { AuthContext } from './context/auth-context';
+
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const role = 'admin';
+
+  const login = useCallback(() => {
+    setIsLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+  }, []);
+
+  let routes;
+
+  if (isLoggedIn) {
+    if (role === 'admin') {
+      routes = (
         <Switch>
-          <MainNavigation />
+          <Route path='/' exact></Route>
+          <Route path='/users' exact></Route>
+          <Redirect to='/' />
         </Switch>
+      );
+    } else {
+      routes = (
+        <Switch>
+          <Route path='/' exact></Route>
+          <Route path='/:userId/favourites' exact></Route>
+          <Redirect to='/' />
+        </Switch>
+      );
+    }
+  } else {
+    routes = (
+      <Switch>
+        <Route path='/' exact></Route>
+        <Route path='/auth'></Route>
+        <Redirect to='/' />
+      </Switch>
+    );
+  }
+
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, role }}>
+      <Router>
+        <MainNavigation />
+        <main>{routes}</main>
       </Router>
-    </div>
+    </AuthContext.Provider>
   );
-}
+};
 
 export default App;
