@@ -6,6 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import MainNavigation from './components/Navigation/MainNavigation';
+import Auth from './components/Users/Auth';
 
 import { AuthContext } from './context/auth-context';
 
@@ -45,7 +46,9 @@ const App = () => {
     routes = (
       <Switch>
         <Route path='/' exact></Route>
-        <Route path='/auth'></Route>
+        <Route path='/auth'>
+          <Auth />
+        </Route>
         <Redirect to='/' />
       </Switch>
     );
