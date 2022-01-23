@@ -8,6 +8,7 @@ import {
 import MainNavigation from './components/Navigation/MainNavigation';
 import Auth from './components/Users/Auth';
 import Users from './components/Users/Users';
+import Products from './components/Products/Products';
 
 import { AuthContext } from './context/auth-context';
 
@@ -29,7 +30,9 @@ const App = () => {
     if (role === 'admin') {
       routes = (
         <Switch>
-          <Route path='/' exact></Route>
+          <Route path='/' exact>
+            <Products />
+          </Route>
           <Route path='/users' exact>
             <Users />
           </Route>
@@ -48,7 +51,9 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-        <Route path='/' exact></Route>
+        <Route path='/' exact>
+          <Products />
+        </Route>
         <Route path='/auth'>
           <Auth />
         </Route>
