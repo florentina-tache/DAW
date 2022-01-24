@@ -7,6 +7,13 @@
   flex-wrap: wrap;
 }
 
+.basket-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+}
+
 @media only screen and (max-width: 1100px) {
   .products-list {
     list-style: none;

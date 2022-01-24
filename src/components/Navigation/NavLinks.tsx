@@ -14,6 +14,11 @@ const NavLinks = () => {
           SHOP NOW
         </NavLink>
       </li>
+      <li>
+        <NavLink to='/basket' exact>
+          BASKET
+        </NavLink>
+      </li>
       {auth.isLoggedIn && auth.role === 'admin' && (
         <li>
           <NavLink to='/users' exact>

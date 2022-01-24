@@ -9,7 +9,7 @@ interface Props {
   size?: string;
   inverse?: boolean;
   danger?: boolean;
-  onClick?: React.MouseEventHandler<HTMLElement>;
+  onClick?: any; //React.MouseEventHandler<HTMLElement>
   to?: string;
   type?: 'button' | 'submit' | undefined;
   disabled?: boolean;

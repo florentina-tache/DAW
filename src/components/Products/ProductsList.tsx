@@ -6,9 +6,10 @@ import './ProductsList.css';
 
 interface Props {
   items: Array<object>;
+  className: string;
 }
 
-const UsersList = ({ items }: Props) => {
+const UsersList = ({ items, className }: Props) => {
   if (items.length === 0) {
     return (
       <div className='center'>
@@ -20,7 +21,7 @@ const UsersList = ({ items }: Props) => {
   }
 
   return (
-    <ul className='products-list'>
+    <ul className={className}>
       {items.map((product: any) => (
         <Product
           key={product.id}

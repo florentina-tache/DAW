@@ -4,7 +4,7 @@ import { PRODUCTS } from '../../shared/util/productMock';
 import ProductsList from './ProductsList';
 
 const Products = () => {
-  return <ProductsList items={PRODUCTS} />;
+  return <ProductsList items={PRODUCTS} className={'products-list'} />;
 };
 
 export default Products;
