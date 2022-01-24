@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
@@ -15,6 +16,8 @@ import './Auth.css';
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
+
+  let history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -100,6 +103,17 @@ const Auth = () => {
       <Button inverse onClick={switchModeHandler}>
         SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
       </Button>
+      {isLoginMode && (
+        <div className='forgot-password'>
+          <Button
+            onClick={() => {
+              history.push('/reset-password');
+            }}
+          >
+            FORGOT PASSWORD
+          </Button>
+        </div>
+      )}
     </Card>
   );
 };

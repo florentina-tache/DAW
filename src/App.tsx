@@ -12,13 +12,18 @@ import Products from './components/Products/Products';
 
 import { AuthContext } from './context/auth-context';
 import { ProductsContext } from './context/products-context';
+import { LanguageContext } from './context/language-context';
 import Basket from './components/Basket/Basket';
+import ProfileUser from './components/Profile/ProfileUser';
+import PasswordReset from './components/PasswordReset/PasswordReset';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
+  const [language, setLanguage] = useState('EN');
 
-  const role = 'admin';
+  let role = 'admin';
+  role = 'user';
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -30,6 +35,10 @@ const App = () => {
 
   const productsAdded = useCallback((products) => {
     setProducts(products);
+  }, []);
+
+  const changeLanguage = useCallback((products) => {
+    setLanguage(products);
   }, []);
 
   let routes;
@@ -50,8 +59,15 @@ const App = () => {
     } else {
       routes = (
         <Switch>
-          <Route path='/' exact></Route>
-          <Route path='/:userId/favourites' exact></Route>
+          <Route path='/' exact>
+            <Products />
+          </Route>
+          <Route path='/basket' exact>
+            <Basket />
+          </Route>
+          <Route path='/:userId/profile' exact>
+            <ProfileUser />
+          </Route>
           <Redirect to='/' />
         </Switch>
       );
@@ -68,6 +84,9 @@ const App = () => {
         <Route path='/auth'>
           <Auth />
         </Route>
+        <Route path='/reset-password'>
+          <PasswordReset />
+        </Route>
         <Redirect to='/' />
       </Switch>
     );
@@ -76,10 +95,12 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, role }}>
       <ProductsContext.Provider value={{ products, productsAdded }}>
-        <Router>
-          <MainNavigation />
-          <main>{routes}</main>
-        </Router>
+        <LanguageContext.Provider value={{ language, changeLanguage }}>
+          <Router>
+            <MainNavigation />
+            <main>{routes}</main>
+          </Router>
+        </LanguageContext.Provider>
       </ProductsContext.Provider>
     </AuthContext.Provider>
   );
