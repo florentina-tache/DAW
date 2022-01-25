@@ -4,6 +4,7 @@ import Button from '../../shared/components/FormElements/Button';
 import Avatar from '../../shared/components/UIElements/Avatar';
 
 import { ProductsContext } from '../../context/products-context';
+import { LanguageContext } from '../../context/language-context';
 
 import './Product.css';
 
@@ -18,6 +19,7 @@ interface Props {
 
 const Product = ({ id, image, name, price, currency, quantity }: Props) => {
   const { products, productsAdded } = useContext(ProductsContext);
+  const { language } = useContext(LanguageContext);
 
   const [itemQuantity, setItemQuantity] = useState(quantity);
 

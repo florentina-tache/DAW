@@ -4,17 +4,17 @@ import { useHistory } from 'react-router-dom';
 import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
-import {
-  VALIDATOR_EMAIL,
-  VALIDATOR_MINLENGTH,
-  VALIDATOR_REQUIRE,
-} from '../../shared/util/validators';
+import { VALIDATOR_EMAIL } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
-import { AuthContext } from '../../context/auth-context';
+import { LanguageContext } from '../../context/language-context';
+import { AUTH, RESET_PASSWORD } from '../../shared/util/copy';
+
 import './PasswordReset.css';
+import Auth from '../Users/Auth';
 
 const PasswordReset = () => {
   const [successMessage, setSuccessMessage] = useState(false);
+  const { language } = useContext(LanguageContext);
 
   let history = useHistory();
 
@@ -35,7 +35,7 @@ const PasswordReset = () => {
 
   return (
     <Card className='authentication'>
-      <h2>Password reset</h2>
+      <h2>{AUTH.FORGOT_PASSWORD[language]}</h2>
       <hr />
       {!successMessage && (
         <form onSubmit={authSubmitHandler}>
@@ -45,17 +45,17 @@ const PasswordReset = () => {
             type='email'
             label='E-Mail'
             validators={[VALIDATOR_EMAIL()]}
-            errorText='Please enter a valid email address.'
+            errorText={AUTH.EMAIL_ERROR[language]}
             onInput={inputHandler}
           />
           <Button type='submit' disabled={!formState.isValid}>
-            {'RESET'}
+            {RESET_PASSWORD.RESET[language]}
           </Button>
         </form>
       )}
       {successMessage && (
         <div className='success-message'>
-          An email has been sent to reset your account password.
+          {RESET_PASSWORD.SUCCESS_MESSAGE[language]}
         </div>
       )}
       <Button
@@ -64,7 +64,8 @@ const PasswordReset = () => {
           history.push('/auth');
         }}
       >
-        SWITCH TO LOGIN
+        {AUTH.SWITCH_TO[language]}
+        {AUTH.LOGIN[language]}
       </Button>
     </Card>
   );

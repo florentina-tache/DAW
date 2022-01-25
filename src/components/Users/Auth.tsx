@@ -9,12 +9,17 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from '../../shared/util/validators';
+import { AUTH } from '../../shared/util/copy';
+
 import { useForm } from '../../shared/hooks/form-hook';
 import { AuthContext } from '../../context/auth-context';
+import { LanguageContext } from '../../context/language-context';
+
 import './Auth.css';
 
 const Auth = () => {
   const auth = useContext(AuthContext);
+  const { language } = useContext(LanguageContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
   let history = useHistory();
@@ -64,7 +69,7 @@ const Auth = () => {
 
   return (
     <Card className='authentication'>
-      <h2>Login Required</h2>
+      <h2>{AUTH.AUTH_SUBTITLE[language]}</h2>
       <hr />
       <form onSubmit={authSubmitHandler}>
         {!isLoginMode && (
@@ -72,9 +77,9 @@ const Auth = () => {
             element='input'
             id='name'
             type='text'
-            label='Your Name'
+            label={AUTH.YOUR_NAME[language]}
             validators={[VALIDATOR_REQUIRE()]}
-            errorText='Please enter a name.'
+            errorText={AUTH.NAME_ERROR[language]}
             onInput={inputHandler}
           />
         )}
@@ -84,24 +89,25 @@ const Auth = () => {
           type='email'
           label='E-Mail'
           validators={[VALIDATOR_EMAIL()]}
-          errorText='Please enter a valid email address.'
+          errorText={AUTH.EMAIL_ERROR[language]}
           onInput={inputHandler}
         />
         <Input
           element='input'
           id='password'
           type='password'
-          label='Password'
+          label={AUTH.PASSWORD[language]}
           validators={[VALIDATOR_MINLENGTH(5)]}
-          errorText='Please enter a valid password, at least 5 characters.'
+          errorText={AUTH.PASSWORD_ERROR[language]}
           onInput={inputHandler}
         />
         <Button type='submit' disabled={!formState.isValid}>
-          {isLoginMode ? 'LOGIN' : 'SIGNUP'}
+          {isLoginMode ? AUTH.LOGIN[language] : AUTH.SIGNUP[language]}
         </Button>
       </form>
       <Button inverse onClick={switchModeHandler}>
-        SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
+        {AUTH.SWITCH_TO[language]}
+        {isLoginMode ? AUTH.SIGNUP[language] : AUTH.LOGIN[language]}
       </Button>
       {isLoginMode && (
         <div className='forgot-password'>
@@ -110,7 +116,7 @@ const Auth = () => {
               history.push('/reset-password');
             }}
           >
-            FORGOT PASSWORD
+            {AUTH.FORGOT_PASSWORD[language]}
           </Button>
         </div>
       )}

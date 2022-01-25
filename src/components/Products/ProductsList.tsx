@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Product from './Product';
 import Card from '../../shared/components/UIElements/Card';
+import { PRODUCTS } from '../../shared/util/copy';
+import { LanguageContext } from '../../context/language-context';
+
 import './ProductsList.css';
 
 interface Props {
@@ -10,11 +13,13 @@ interface Props {
 }
 
 const UsersList = ({ items, className }: Props) => {
+  const { language } = useContext(LanguageContext);
+
   if (items.length === 0) {
     return (
       <div className='center'>
         <Card>
-          <h2>No products found.</h2>
+          <h2> {PRODUCTS.NO_PRODUCTS[language]}</h2>
         </Card>
       </div>
     );
