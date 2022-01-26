@@ -30,6 +30,10 @@ export const PRODUCTS: any = {
     EN: 'No products found.',
     RO: 'Nu exista produse in cos.',
   },
+  TOTAL_PRICE: {
+    EN: 'TOTAL PRICE: ',
+    RO: 'PRET TOTAL: ',
+  },
 };
 
 export const AUTH: any = {

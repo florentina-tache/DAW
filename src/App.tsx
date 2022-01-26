@@ -21,6 +21,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [products, setProducts] = useState([]);
   const [language, setLanguage] = useState('EN');
+  const [total, setTotal] = useState(0);
 
   let role = 'admin';
   role = 'user';
@@ -39,6 +40,10 @@ const App = () => {
 
   const changeLanguage = useCallback((products) => {
     setLanguage(products);
+  }, []);
+
+  const updateTotal = useCallback((sum: number) => {
+    setTotal(sum);
   }, []);
 
   let routes;
@@ -94,7 +99,9 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, role }}>
-      <ProductsContext.Provider value={{ products, productsAdded }}>
+      <ProductsContext.Provider
+        value={{ products, productsAdded, total, updateTotal }}
+      >
         <LanguageContext.Provider value={{ language, changeLanguage }}>
           <Router>
             <MainNavigation />

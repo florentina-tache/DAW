@@ -18,7 +18,8 @@ interface Props {
 }
 
 const Product = ({ id, image, name, price, currency, quantity }: Props) => {
-  const { products, productsAdded } = useContext(ProductsContext);
+  const { products, productsAdded, total, updateTotal } =
+    useContext(ProductsContext);
   const { language } = useContext(LanguageContext);
 
   const [itemQuantity, setItemQuantity] = useState(quantity);
@@ -42,6 +43,7 @@ const Product = ({ id, image, name, price, currency, quantity }: Props) => {
 
   const handlePlusClick = () => {
     setItemQuantity(itemQuantity + 1);
+    updateTotal(total + price);
   };
   const handleMinusClick = () => {
     if (itemQuantity === 1) {
@@ -53,6 +55,7 @@ const Product = ({ id, image, name, price, currency, quantity }: Props) => {
     if (itemQuantity > 0) {
       setItemQuantity(itemQuantity - 1);
     }
+    updateTotal(total - price);
   };
 
   return (
