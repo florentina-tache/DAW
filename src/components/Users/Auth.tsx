@@ -22,6 +22,8 @@ const Auth = () => {
   const { language } = useContext(LanguageContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
+  // const {sendRequest } = useHttpClient();
+
   let history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -66,6 +68,44 @@ const Auth = () => {
     event.preventDefault();
     auth.login();
   };
+
+  // const authSubmitHandler = async (event: any) => {
+  //   event.preventDefault();
+
+  //   if (isLoginMode) {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         'http://localhost:5000/api/users/login',
+  //         'POST',
+  //         JSON.stringify({
+  //           email: formState.inputs.email.value,
+  //           password: formState.inputs.password.value
+  //         }),
+  //         {
+  //           'Content-Type': 'application/json'
+  //         }
+  //       );
+  //       auth.login(responseData.user.id);
+  //     } catch (err) {}
+  //   } else {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         'http://localhost:5000/api/users/signup',
+  //         'POST',
+  //         JSON.stringify({
+  //           name: formState.inputs.name.value,
+  //           email: formState.inputs.email.value,
+  //           password: formState.inputs.password.value
+  //         }),
+  //         {
+  //           'Content-Type': 'application/json'
+  //         }
+  //       );
+
+  //       auth.login(responseData.user.id);
+  //     } catch (err) {}
+  //   }
+  // };
 
   return (
     <Card className='authentication'>

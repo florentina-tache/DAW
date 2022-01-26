@@ -1,8 +1,23 @@
 import React from 'react';
+// import { useParams } from 'react-router-dom';
 
 import Profile from './Profile';
 
 const ProfileUser = () => {
+  //   const userId = useParams().userId;
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         'http://localhost:5000/api/users/${userId}'
+  //       );
+
+  //       setLoadedUsers(responseData.users);
+  //     } catch (err) {}
+  //   };
+  //   fetchUsers();
+  // }, [sendRequest]);
+
   const USER = {
     id: 'u1',
     name: 'Catina Dobrescu',

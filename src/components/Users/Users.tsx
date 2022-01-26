@@ -1,8 +1,12 @@
 import React from 'react';
 
 import UsersList from './UsersList';
+//import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const Users = () => {
+  //  const [loadedUsers, setLoadedUsers] = useState();
+  // const {sendRequest } = useHttpClient();
+
   const USERS = [
     {
       id: 'u1',
@@ -24,7 +28,22 @@ const Users = () => {
     },
   ];
 
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const responseData = await sendRequest(
+  //         'http://localhost:5000/api/users'
+  //       );
+
+  //       setLoadedUsers(responseData.users);
+  //     } catch (err) {}
+  //   };
+  //   fetchUsers();
+  // }, [sendRequest]);
+
   return <UsersList items={USERS} />;
+
+  // return <UsersList items={loadedUsers} />;
 };
 
 export default Users;

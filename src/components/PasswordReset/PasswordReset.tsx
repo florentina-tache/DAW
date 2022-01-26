@@ -8,9 +8,9 @@ import { VALIDATOR_EMAIL } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { LanguageContext } from '../../context/language-context';
 import { AUTH, RESET_PASSWORD } from '../../shared/util/copy';
+//import { useHttpClient } from '../../shared/hooks/http-hook';
 
 import './PasswordReset.css';
-import Auth from '../Users/Auth';
 
 const PasswordReset = () => {
   const [successMessage, setSuccessMessage] = useState(false);
@@ -30,6 +30,18 @@ const PasswordReset = () => {
 
   const authSubmitHandler = (event: any) => {
     event.preventDefault();
+    // try {
+    //   const responseData = await sendRequest(
+    //     'http://localhost:5000/api/users/password-reset',
+    //     'POST',
+    //     JSON.stringify({
+    //       email: formState.inputs.email.value,
+    //     }),
+    //     {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   );
+    // } catch (err) {}
     setSuccessMessage(true);
   };
 
