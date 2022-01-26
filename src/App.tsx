@@ -24,7 +24,6 @@ const App = () => {
   const [total, setTotal] = useState(0);
 
   let role = 'admin';
-  role = 'user';
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -57,6 +56,9 @@ const App = () => {
           </Route>
           <Route path='/users' exact>
             <Users />
+          </Route>
+          <Route path='/basket' exact>
+            <Basket />
           </Route>
           <Redirect to='/' />
         </Switch>
